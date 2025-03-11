@@ -1,2 +1,2 @@
 # Requisicao-Banco-de-Dados
-Exibição de dados de um BD e Inserção de dados nesse mesmo BD
+Este projeto, desenvolvido em Java utilizando JDBC (Java Database Connectivity), permite a exibição de dados de um banco de dados relacional e a inserção de novos registros. O sistema realiza a recuperação de informações de uma tabela e a inserção de dados de forma eficiente e segura, utilizando conexões JDBC para executar consultas SQL e manipular os dados no banco de dados.
