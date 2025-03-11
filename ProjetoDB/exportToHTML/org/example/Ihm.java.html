@@ -1,0 +1,92 @@
+<html>
+<head>
+<title>Ihm.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Ihm.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">org</span><span class="s2">.</span><span class="s1">example</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.*;</span>
+
+<span class="s0">public class </span><span class="s1">Ihm </span><span class="s2">{</span>
+
+    <span class="s0">private </span><span class="s1">GerenciadorNomes gerenciador</span><span class="s2">;</span>
+    <span class="s0">private </span><span class="s1">Scanner entrada</span><span class="s2">;</span>
+
+    <span class="s3">// Construtor da classe Ihm que recebe um GerenciadorNomes</span>
+    <span class="s0">public </span><span class="s1">Ihm</span><span class="s2">(</span><span class="s1">GerenciadorNomes gerenciador</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">gerenciador </span><span class="s2">= </span><span class="s1">gerenciador</span><span class="s2">;</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">entrada </span><span class="s2">= </span><span class="s0">new </span><span class="s1">Scanner</span><span class="s2">(</span><span class="s1">System</span><span class="s2">.</span><span class="s1">in</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Metodo principal de interação com o usuário</span>
+    <span class="s0">public void </span><span class="s1">dialogar</span><span class="s2">() {</span>
+        <span class="s0">boolean </span><span class="s1">sair </span><span class="s2">= </span><span class="s0">false</span><span class="s2">;</span>
+
+        <span class="s0">while </span><span class="s2">(!</span><span class="s1">sair</span><span class="s2">) {</span>
+            <span class="s1">exibirMenu</span><span class="s2">();  </span><span class="s3">// Exibe o menu para o usuário</span>
+
+            <span class="s1">String opcao </span><span class="s2">= </span><span class="s1">entrada</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();  </span><span class="s3">// Lê a opção do usuário</span>
+            <span class="s0">switch </span><span class="s2">(</span><span class="s1">opcao</span><span class="s2">) {</span>
+                <span class="s0">case </span><span class="s4">&quot;1&quot;</span><span class="s2">:</span>
+                    <span class="s1">listarNomes</span><span class="s2">();  </span><span class="s3">// Lista os nomes cadastrados</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">&quot;2&quot;</span><span class="s2">:</span>
+                    <span class="s1">adicionarNome</span><span class="s2">();  </span><span class="s3">// Permite adicionar um novo nome</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">case </span><span class="s4">&quot;3&quot;</span><span class="s2">:</span>
+                    <span class="s1">sair </span><span class="s2">= </span><span class="s0">true</span><span class="s2">;  </span><span class="s3">// Encerra o programa</span>
+                    <span class="s0">break</span><span class="s2">;</span>
+                <span class="s0">default</span><span class="s2">:</span>
+                    <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Opção inválida!&quot;</span><span class="s2">);  </span><span class="s3">// Caso a opção seja inválida</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Fim do programa!&quot;</span><span class="s2">);  </span><span class="s3">// Mensagem de encerramento</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Método para exibir o menu principal</span>
+    <span class="s0">private void </span><span class="s1">exibirMenu</span><span class="s2">() {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">&gt;&gt; MENU PRINCIPAL:&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;(1) Listar nomes&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;(2) Adicionar Nome&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;(3) Sair&quot;</span><span class="s2">);</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;Escolha uma opção: &quot;</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Método para listar os nomes cadastrados</span>
+    <span class="s0">private void </span><span class="s1">listarNomes</span><span class="s2">() {</span>
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">nomes </span><span class="s2">= </span><span class="s1">gerenciador</span><span class="s2">.</span><span class="s1">obterNomes</span><span class="s2">();  </span><span class="s3">// Obtém a lista de nomes</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">&gt;&gt; Lista dos nomes:&quot;</span><span class="s2">);</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">nomes</span><span class="s2">.</span><span class="s1">isEmpty</span><span class="s2">()) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Nenhum nome encontrado.&quot;</span><span class="s2">);</span>
+        <span class="s2">} </span><span class="s0">else </span><span class="s2">{</span>
+            <span class="s0">for </span><span class="s2">(</span><span class="s1">String nome </span><span class="s2">: </span><span class="s1">nomes</span><span class="s2">) {</span>
+                <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s1">nome</span><span class="s2">);  </span><span class="s3">// Imprime os nomes</span>
+            <span class="s2">}</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Método para adicionar um nome à lista</span>
+    <span class="s0">private void </span><span class="s1">adicionarNome</span><span class="s2">() {</span>
+        <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">print</span><span class="s2">(</span><span class="s4">&quot;</span><span class="s0">\n</span><span class="s4">&gt;&gt; Digite o novo nome: &quot;</span><span class="s2">);</span>
+        <span class="s1">String novoNome </span><span class="s2">= </span><span class="s1">entrada</span><span class="s2">.</span><span class="s1">nextLine</span><span class="s2">();  </span><span class="s3">// Lê o novo nome do usuário</span>
+        <span class="s1">gerenciador</span><span class="s2">.</span><span class="s1">adicionarNome</span><span class="s2">(</span><span class="s1">novoNome</span><span class="s2">);  </span><span class="s3">// Adiciona o nome ao gerenciador</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>

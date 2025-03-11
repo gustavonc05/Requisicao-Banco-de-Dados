@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>GerenciadorNomesBD.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #7a7e85;}
+.s4 { color: #6aab73;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+GerenciadorNomesBD.java</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s1">org</span><span class="s2">.</span><span class="s1">example</span><span class="s2">;</span>
+
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">sql</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">ArrayList</span><span class="s2">;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">util</span><span class="s2">.</span><span class="s1">List</span><span class="s2">;</span>
+
+<span class="s0">public class </span><span class="s1">GerenciadorNomesBD </span><span class="s0">implements </span><span class="s1">GerenciadorNomes </span><span class="s2">{</span>
+    <span class="s0">private </span><span class="s1">Connection conexao</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">GerenciadorNomesBD</span><span class="s2">() {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s3">// Estabelece a conexão com o banco de dados</span>
+            <span class="s0">this</span><span class="s2">.</span><span class="s1">conexao </span><span class="s2">= </span><span class="s1">DriverManager</span><span class="s2">.</span><span class="s1">getConnection</span><span class="s2">(</span>
+                    <span class="s4">&quot;jdbc:postgresql://db.xidpkvejjyfpfigolmlq.supabase.co:5432/postgres?user=postgres&amp;password=yoVchOc1yfCbUCuP&quot;</span>
+            <span class="s2">);</span>
+            <span class="s3">// Caso a conexão de certo</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Conexão realizada com sucesso!&quot;</span><span class="s2">);</span>
+
+        <span class="s2">} </span><span class="s0">catch </span><span class="s2">(</span><span class="s1">SQLException e</span><span class="s2">) {</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Erro ao conectar ao banco de dados.&quot;</span><span class="s2">);</span>
+            <span class="s1">e</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Printando todos os dados da tabela</span>
+    <span class="s0">public </span><span class="s1">List</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">obterNomes</span><span class="s2">() {</span>
+        <span class="s1">List</span><span class="s2">&lt;</span><span class="s1">String</span><span class="s2">&gt; </span><span class="s1">nomes </span><span class="s2">= </span><span class="s0">new </span><span class="s1">ArrayList</span><span class="s2">&lt;&gt;();</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s3">// Printando todos os dados da tabela</span>
+            <span class="s1">ResultSet rsClient </span><span class="s2">= </span><span class="s1">conexao</span><span class="s2">.</span><span class="s1">createStatement</span><span class="s2">().</span><span class="s1">executeQuery</span><span class="s2">(</span><span class="s4">&quot;SELECT * FROM GerenciadorNomesBD&quot;</span><span class="s2">);</span>
+            <span class="s0">while </span><span class="s2">(</span><span class="s1">rsClient</span><span class="s2">.</span><span class="s1">next</span><span class="s2">()) {</span>
+                <span class="s1">String nome </span><span class="s2">= </span><span class="s1">rsClient</span><span class="s2">.</span><span class="s1">getString</span><span class="s2">(</span><span class="s4">&quot;nome&quot;</span><span class="s2">); </span><span class="s3">// Exibindo os dados da coluna nome</span>
+                <span class="s1">nomes</span><span class="s2">.</span><span class="s1">add</span><span class="s2">(</span><span class="s1">nome</span><span class="s2">);</span>
+            <span class="s2">}</span>
+        <span class="s2">} </span><span class="s3">// Caso não consiga obter os nomes</span>
+        <span class="s0">catch </span><span class="s2">(</span><span class="s1">SQLException ex</span><span class="s2">) {</span>
+            <span class="s1">ex</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+        <span class="s0">return </span><span class="s1">nomes</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s3">// Adicionando nome</span>
+    <span class="s0">public void </span><span class="s1">adicionarNome</span><span class="s2">(</span><span class="s1">String nome</span><span class="s2">) {</span>
+        <span class="s0">try </span><span class="s2">{</span>
+            <span class="s3">// Adicionando nome na tabela</span>
+            <span class="s1">Statement stmt </span><span class="s2">= </span><span class="s1">conexao</span><span class="s2">.</span><span class="s1">createStatement</span><span class="s2">();</span>
+            <span class="s1">String sqlInsertNome </span><span class="s2">= </span><span class="s4">&quot;INSERT INTO GerenciadorNomesBD (nome) VALUES ('&quot; </span><span class="s2">+ </span><span class="s1">nome </span><span class="s2">+ </span><span class="s4">&quot;')&quot;</span><span class="s2">;  </span><span class="s3">// Essa variável&quot;nome&quot; vem da classe Ihm</span>
+            <span class="s1">stmt</span><span class="s2">.</span><span class="s1">executeUpdate</span><span class="s2">(</span><span class="s1">sqlInsertNome</span><span class="s2">);</span>
+            <span class="s1">System</span><span class="s2">.</span><span class="s1">out</span><span class="s2">.</span><span class="s1">println</span><span class="s2">(</span><span class="s4">&quot;Nome inserido com sucesso!&quot;</span><span class="s2">);</span>
+        <span class="s2">}</span>
+        <span class="s3">// Caso a adição do nome não de certo</span>
+        <span class="s0">catch </span><span class="s2">(</span><span class="s1">SQLException ex</span><span class="s2">) {</span>
+            <span class="s1">ex</span><span class="s2">.</span><span class="s1">printStackTrace</span><span class="s2">();</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
